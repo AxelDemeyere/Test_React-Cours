@@ -5,7 +5,7 @@ import { http, HttpResponse } from 'msw';
 import { ProductList } from './ProductList';
 
 describe('ProductList Component', () => {
-    test('should display loading then success with product list', async () => {
+    test('devrait afficher le chargement puis le succès avec la liste des produits', async () => {
         render(<ProductList />);
         expect(screen.getByText('Chargement...')).toBeInTheDocument();
         await waitFor(() => {
@@ -18,7 +18,7 @@ describe('ProductList Component', () => {
         expect(screen.queryByText('Chargement...')).not.toBeInTheDocument();
     });
 
-    test('should display error message when server returns 500', async () => {
+    test('devrait afficher un message d\'erreur quand le serveur retourne 500', async () => {
         server.use(
             http.get('https://api.example.com/products', () => {
                 return new HttpResponse(null, { status: 500 });
@@ -35,7 +35,7 @@ describe('ProductList Component', () => {
         expect(screen.queryByText('Chargement...')).not.toBeInTheDocument();
     });
 
-    test('should display "Aucun produit" when server returns empty array', async () => {
+    test('devrait afficher "Aucun produit" quand le serveur retourne un tableau vide', async () => {
         server.use(
             http.get('https://api.example.com/products', () => {
                 return HttpResponse.json([]);
