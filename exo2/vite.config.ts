@@ -10,8 +10,13 @@ export default defineConfig({
     setupFiles: './src/tests/setup.js',
     coverage: {
       reporter: ['text', 'html'],
-      exclude: ['node_modules/', 'src/tests/setup.js', 'vite.config.ts', 'eslint.config.js', "src/main.tsx", "src/App.tsx"],
-      include: ['src/utils/**'],
+      exclude: [
+        'node_modules/',
+        'src/tests/setup.js',
+        'vite.config.ts',
+        'eslint.config.js',
+        "src/main.tsx",
+        "src/App.tsx"],
     }
   }
 })
