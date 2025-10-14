@@ -1,4 +1,4 @@
-import {describe, expect, vi, it} from "vitest";
+import {describe, expect, vi, it, beforeEach} from "vitest";
 import { render , screen} from "@testing-library/react";
 import {SearchBar} from "./SearchBar.tsx";
 import userEvent from '@testing-library/user-event'
@@ -10,6 +10,7 @@ describe("SearchBar", () => {
     beforeEach(() => {
         handleSearch.mockClear();
     });
+
     it('devrait saisir une requête et soumettre le bouton la requête trimée', async () => {
         render(<SearchBar onSearch={handleSearch}/>);
         const searchInput = screen.getByPlaceholderText("Rechercher...");
@@ -19,13 +20,10 @@ describe("SearchBar", () => {
         await userEvent.click(searchButton);
 
         expect(handleSearch).toHaveBeenCalledWith("Salut Christophe");
-
     });
 
     it('devrait saisir une requête et soumettre avec "entrer" la requête trimée', async () => {
-        beforeEach(() => {
-            handleSearch.mockClear();
-        });
+
         render(<SearchBar onSearch={handleSearch}/>);
         const searchInput = screen.getByPlaceholderText("Rechercher...");
 
@@ -34,9 +32,7 @@ describe("SearchBar", () => {
     });
 
     it('devrait avoir le bouton "Rechercher" désactivé', async () => {
-        beforeEach(() => {
-            handleSearch.mockClear();
-        });
+
         render(<SearchBar onSearch={handleSearch}/>);
         const searchInput = screen.getByPlaceholderText("Rechercher...");
 
@@ -50,9 +46,7 @@ describe("SearchBar", () => {
     });
 
     it('devrait ne faire aucune recherche si la requête est vide', async () => {
-        beforeEach(() => {
-            handleSearch.mockClear();
-        });
+
         render(<SearchBar onSearch={handleSearch}/>);
         const searchInput = screen.getByPlaceholderText("Rechercher...");
         const searchButton = screen.getByRole("button", { name: "Rechercher" });
@@ -66,9 +60,7 @@ describe("SearchBar", () => {
     });
 
     it('devrait permettre la navigation au clavier avec Tab', async () => {
-        beforeEach(() => {
-            handleSearch.mockClear();
-        });
+
         render(<SearchBar onSearch={handleSearch}/>);
         const searchInput = screen.getByPlaceholderText("Rechercher...");
         const searchButton = screen.getByRole("button", { name: "Rechercher" });
